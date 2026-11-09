@@ -1,0 +1,52 @@
+temata <- c(
+  "Grafy a mapy", "Práce s daty", "AI asistent nebo agent",
+  "Příprava na praxi", "Prezentace", "Plánování",
+  "Zdroje a rešerše", "Překlad", "Psaní a úprava textu",
+  "Učení a porozumění"
+)
+
+nyni <- c(12, 26, 5, 15, 19, 16, 84, 55, 92, 95)
+zlepsit <- c(68, 65, 34, 41, 35, 27, 72, 18, 41, 41)
+pozice <- length(temata):1
+
+par(mar = c(5, 14, 5, 2))
+
+plot(
+  NA,
+  xlim = c(0, 100),
+  ylim = c(0.5, length(temata) + 1.7),
+  xlab = "Podíl studentů",
+  ylab = "",
+  axes = FALSE,
+  main = "K čemu studenti AI používají a v čem se chtějí zdokonalit"
+)
+
+abline(v = seq(0, 100, 25), col = "#e6e6e6")
+axis(1, at = seq(0, 100, 25),
+     labels = paste0(seq(0, 100, 25), " %"))
+axis(2, at = pozice, labels = temata, las = 1, tick = FALSE)
+
+segments(nyni, pozice, zlepsit, pozice,
+         col = "#d9d9d9", lwd = 3)
+
+points(nyni, pozice, pch = 16, cex = 1.5, col = "#7f7f7f")
+points(zlepsit, pozice, pch = 16, cex = 1.5, col = "#b0006d")
+
+text(nyni, pozice + 0.28,
+     labels = paste0(nyni, " %"),
+     col = "#666666", cex = 0.8)
+
+text(zlepsit, pozice - 0.28,
+     labels = paste0(zlepsit, " %"),
+     col = "#b0006d", cex = 0.8)
+
+legend(
+  "bottom",
+  inset = c(0, 0.02),
+  legend = c("Nyní používají", "Chtějí se zdokonalit"),
+  col = c("#7f7f7f", "#b0006d"),
+  pch = 16,
+  pt.cex = 1.3,
+  horiz = TRUE,
+  bty = "n"
+)
